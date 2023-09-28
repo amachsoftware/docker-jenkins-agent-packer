@@ -21,7 +21,7 @@ RUN apt-get update \
 ENV LC_ALL C.UTF-8
 
 # Install latest Ansible + pywinrm + jinja2 using pip
-RUN pip install --no-cache-dir ansible pywinrm jinja2
+RUN pip install --no-cache-dir ansible pywinrm jinja2 --break-system-packages
 
 # Install Packer (jq for parsing manifest files)
 RUN if [ "$(uname -m)" = "x86_64" ]; then curl "https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip" -o "packer.zip"; elif [ "$(uname -m)" = "aarch64" ]; then curl "https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_arm64.zip" -o "packer.zip"; fi && unzip packer.zip -d /usr/local/bin/
